@@ -1,0 +1,45 @@
+{
+	"name": "cd-mock-exam-pdftoppm",
+	"version": "1.0.0",
+	"description": "",
+	"main": "api/index.js",
+	"scripts": {
+		"dev": "nodemon api/index.js",
+		"start": "node api/index.js",
+		"postinstall": "patch-package"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/novda-union/novda-mock-exam-pdftoppm.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "commonjs",
+	"bugs": {
+		"url": "https://github.com/novda-union/novda-mock-exam-pdftoppm/issues"
+	},
+	"homepage": "https://github.com/novda-union/novda-mock-exam-pdftoppm#readme",
+	"dependencies": {
+		"@supabase/supabase-js": "^2.51.0",
+		"axios": "^1.10.0",
+		"cors": "^2.8.5",
+		"dotenv": "^17.2.0",
+		"express": "^5.1.0",
+		"form-data": "^4.0.4",
+		"glob": "^11.0.3",
+		"jsonrepair": "^3.13.0",
+		"multer": "^2.0.1",
+		"nodemailer": "^7.0.5",
+		"nodemon": "^3.1.10",
+		"openai": "^5.9.0",
+		"pdf-poppler": "^0.2.1",
+		"sharp": "^0.34.3",
+		"tesseract.js": "^6.0.1",
+		"uuid": "^11.1.0"
+	},
+	"devDependencies": {
+		"patch-package": "^8.0.0",
+		"postinstall-postinstall": "^2.1.0"
+	}
+}
