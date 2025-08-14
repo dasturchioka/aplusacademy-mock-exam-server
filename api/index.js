@@ -35,7 +35,7 @@ const ocrService = new OCRService({
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://novda-mock-exam.vercel.app', 'https://www.aplusacademy.uz', 'https://novda-mock-exam-demo.vercel.app'], // your frontend port
+  origin: ['http://localhost:3000', 'https://novda-mock-exam.vercel.app', 'https://www.aplusacademy.uz', 'https://novda-mock-exam-demo.vercel.app', 'https://aplusacademy-mock-exam.vercel.app'], // your frontend port
   credentials: true
 }))
 app.use(express.json())
