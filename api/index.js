@@ -1294,15 +1294,24 @@ app.post('/api/admin/assign-test-to-user', async (req, res) => {
   const { user_id, test_id, admin_id } = req.body
 
   try {
-    const { error } = await supabase
+    // First, delete any existing test assignments for this user to ensure only one active assignment
+    const { error: deleteError } = await supabase
       .from('user_assigned_tests')
-      .upsert({
+      .delete()
+      .eq('user_id', user_id)
+
+    if (deleteError) throw deleteError
+
+    // Then insert the new test assignment
+    const { error: insertError } = await supabase
+      .from('user_assigned_tests')
+      .insert({
         user_id,
         test_id,
-        assigned_by: admin_id, // 👈 use this
-      }, { onConflict: ['user_id', 'test_id'] })
+        assigned_by: admin_id,
+      })
 
-    if (error) throw error
+    if (insertError) throw insertError
 
     return res.json({ success: true })
   } catch (err) {
