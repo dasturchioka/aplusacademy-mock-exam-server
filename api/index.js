@@ -1633,6 +1633,24 @@ app.post('/api/users', async (req, res) => {
   }
 })
 
+app.get("/api/users/count", async (req, res) => {
+  try {
+    const { error, data } = await supabase.from("users").select("id")
+
+    if (error) {
+      return res.status(400).json(error)
+    }
+
+    return res.json({ success: true, count: data.length  })
+  } catch (error) {
+    console.error('Get users count error:', error)
+    return res.status(500).json({
+      success: false,
+      error: error.message
+    })
+  }
+})
+
 app.get('/api/users', async (req, res) => {
   const { offset = 0, limit = 10, search = '' } = req.query;
 
@@ -2052,6 +2070,24 @@ app.post('/api/results', async (req, res) => {
   } catch (error) {
     console.error('Save results error:', error)
     res.status(500).json({
+      success: false,
+      error: error.message
+    })
+  }
+})
+
+app.get("/api/results/count", async (req, res) => {
+  try {
+    const { error, data } = await supabase.from("results").select("id")
+
+    if (error) {
+      return res.status(400).json(error)
+    }
+
+    return res.json({ success: true, count: data.length })
+  } catch (error) {
+    console.error('Get results count error:', error)
+    return res.status(500).json({
       success: false,
       error: error.message
     })
