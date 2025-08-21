@@ -1641,7 +1641,7 @@ app.get("/api/users/count", async (req, res) => {
       return res.status(400).json(error)
     }
 
-    return res.json({ success: true, count: data.length  })
+    return res.json({ success: true, count: data.length })
   } catch (error) {
     console.error('Get users count error:', error)
     return res.status(500).json({
@@ -2129,6 +2129,39 @@ app.get('/api/results', async (req, res) => {
     })
   } catch (error) {
     console.error('Get results error:', error)
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    })
+  }
+})
+
+app.get('/api/results/stat', async (req, res) => {
+  try {
+    let { data, error } = await supabase
+      .from('results_search_view')
+      .select(`
+    exam_taker_id,
+    full_name,
+    title,
+    listening_score,
+    reading_score,
+    writing_score,
+    speaking_score,
+    overall_score,
+    email_sent
+  `, { count: 'exact' })
+
+    if (!data || error) {
+      return res.status(400).json(error)
+    }
+
+    return res.json({
+      success: true,
+      results: data || []
+    })
+  } catch (error) {
+    console.error('Get results stat error:', error)
     res.status(500).json({
       success: false,
       error: error.message,
